@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:include="fragments/header :: header"></head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Год выхода</th>
+                    <th scope="col">Продолжительность</th>
+                    <th scope="col">Возрастное ограничение</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="film : ${films}">
+                    <td>
+                        <a th:text="${film.name}"
+                           th:href="@{/films/{filmId}(filmId=${film.id})}">
+                        </a>
+                    </td>
+                    <td th:text="${film.year}"/>
+                    <td th:text="${film.durationInMinutes} + ' мин.'"/>
+                    <td th:text="${film.minimalAge} + '+'"/>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>

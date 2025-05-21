@@ -8,6 +8,7 @@
 - **Java 21**
 - **Spring Boot 3.4.5**
 - **Thymeleaf 3.1.3**
+- **Bootstrap 4.4.1**
 - **MariaDB 11.7.2**
 - **Sql2o 1.9.1**
 - **Liquibase: latest**

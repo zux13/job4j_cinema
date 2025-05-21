@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:include="fragments/header :: header"></head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<div class="container">
+
+    <div class="card" th:object="${filmDto}">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img th:src="@{/files/{id}(id=*{fileId})}" class="img-fluid rounded-start" alt="Обложка фильма">
+            </div>
+
+            <div class="col-md-8">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Название:</th>
+                            <td th:text="*{name}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Год:</th>
+                            <td th:text="*{year}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Жанр:</th>
+                            <td th:text="*{genreName}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Возрастное ограничение:</th>
+                            <td th:text="*{minimalAge} + '+'"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Продолжительность:</th>
+                            <td th:text="*{durationInMinutes} + ' мин.'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-3">
+                        <h5>Описание</h5>
+                        <p th:text="*{description}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
