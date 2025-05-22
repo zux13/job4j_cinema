@@ -8,7 +8,10 @@ import ru.job4j.cinema.repository.FilmRepository;
 import ru.job4j.cinema.repository.GenreRepository;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class SimpleFilmService implements FilmService {
@@ -46,5 +49,11 @@ public class SimpleFilmService implements FilmService {
     @Override
     public Collection<Film> findAll() {
         return filmRepository.findAll();
+    }
+
+    @Override
+    public Map<Integer, Film> getFilmsMap() {
+        return filmRepository.findAll().stream()
+                .collect(Collectors.toMap(Film::getId, Function.identity()));
     }
 }

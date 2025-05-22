@@ -4,29 +4,46 @@
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
 <div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Название</th>
-                    <th scope="col">Год выхода</th>
-                    <th scope="col">Продолжительность</th>
-                    <th scope="col">Возрастное ограничение</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="film : ${films}">
-                    <td>
-                        <a th:text="${film.name}"
-                           th:href="@{/films/{filmId}(filmId=${film.id})}">
-                        </a>
-                    </td>
-                    <td th:text="${film.year}"/>
-                    <td th:text="${film.durationInMinutes} + ' мин.'"/>
-                    <td th:text="${film.minimalAge} + '+'"/>
-                </tr>
-            </tbody>
-        </table>
+    <h2 class="mb-4">Кинотека</h2>
+   <div class="row">
+        <div class="col-md-6 mb-4" th:each="film : ${films}">
+            <a th:href="@{/films/{id}(id=${film.id})}" class="text-decoration-none text-dark">
+                <div class="card h-100 shadow-sm p-3" style="font-size: 1.1rem;">
+                    <div class="row no-gutters">
+
+                        <div class="col-md-4 d-flex align-items-center">
+                            <img th:src="@{/files/{id}(id=${film.fileId})}" class="img-fluid rounded" alt="Обложка фильма">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body py-2">
+
+                                <h4 class="card-title font-weight-bold mb-3" th:text="${film.name}">Название фильма</h4>
+
+                                <table class="table table-sm mb-0">
+                                    <tbody>
+                                    <tr>
+                                        <th class="text-muted pr-3">Год выпуска:</th>
+                                        <td th:text="${film.year}">2024</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted pr-3">Продолжительность:</th>
+                                        <td th:text="${film.durationInMinutes} + ' мин'">120 мин</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted pr-3">Возраст:</th>
+                                        <td th:text="${film.minimalAge} + '+'">12+</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>

@@ -4,7 +4,7 @@
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
 <div class="container">
-
+    <h2 class="mb-4" th:text="${filmDto.name}">Название фильма</h2>
     <div class="card" th:object="${filmDto}">
         <div class="row g-0">
             <div class="col-md-4">
