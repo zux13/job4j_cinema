@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/header :: header"></head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <div th:replace="fragments/navigation :: navigation"></div>
-<div style="display: grid; place-items: center;">
-    <h1>Кинотеатр</h1>
+<div class="container mb-4 flex-grow-1">
+    <h2>Кинотеатр</h2>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

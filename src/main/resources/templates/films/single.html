@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head th:include="fragments/header :: header"></head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <div th:replace="fragments/navigation :: navigation"></div>
-<div class="container">
+<div class="container mb-4 flex-grow-1">
     <h2 class="mb-4" th:text="${filmDto.name}">Название фильма</h2>
     <div class="card" th:object="${filmDto}">
         <div class="row g-0">
