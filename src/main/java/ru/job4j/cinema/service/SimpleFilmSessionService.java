@@ -81,6 +81,7 @@ public class SimpleFilmSessionService implements FilmSessionService {
         filmSessionDto.setFilmName(filmDto.getName());
         filmSessionDto.setHallName(hall.getName());
         filmSessionDto.setHallDescription(hall.getDescription());
+        filmSessionDto.setStartTime(filmSession.getStartTime());
         filmSessionDto.setPrice(filmSession.getPrice());
         return filmSessionDto;
     }

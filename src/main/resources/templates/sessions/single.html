@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:include="fragments/header :: header"></head>
+
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div class="container flex-grow-1">
+    <div class="text-center mb-4">
+        <h2 th:text="${sessionDto.filmName}">Название фильма</h2>
+        <h5 class="text-muted" th:text="${sessionDto.hallName} + ' | ' + ${#temporals.format(sessionDto.startTime, 'dd.MM.yyyy HH:mm')}">
+            Название зала | 01.01.2025 18:00
+        </h5>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row align-items-center">
+        <div class="col-md-3 d-flex align-items-center justify-content-center h-100 mb-4">
+            <a th:href="@{/films/{id}(id=${sessionDto.filmId})}">
+                <img th:src="@{/files/{id}(id=${sessionDto.fileId})}" class="img-fluid img-thumbnail" alt="Обложка фильма">
+            </a>
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <div class="screen text-center mb-4">Экран</div>
+            <form method="post" th:action="@{/tickets/book}">
+                <input type="hidden" name="sessionId" th:value="${sessionDto.id}"/>
+
+                <div class="d-flex flex-column align-items-center gap-2">
+                    <div th:each="row : ${#numbers.sequence(1, sessionDto.rowCount)}" class="d-flex gap-2">
+                        <div th:each="seat : ${#numbers.sequence(1, sessionDto.placeCount)}">
+                            <input type="radio"
+                                   th:id="'seat-' + ${row} + '-' + ${seat}"
+                                   name="selectedSeat"
+                                   th:value="${row + '-' + seat}"
+                                   class="seat-input"/>
+                            <label th:for="'seat-' + ${row} + '-' + ${seat}" class="seat-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-3 d-flex flex-column justify-content-center h-100 mb-4">
+            <div>
+                <h4 class="text-muted">
+                    О зале
+                </h4>
+                <div class="text-muted" th:text="${sessionDto.hallDescription}">
+                    Уютный зал с мягкими креслами и хорошей акустикой.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mb-4">
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div id="seat-info-block" style="visibility: hidden; min-height: 3.5rem;" th:data-price="${sessionDto.price}">
+            <div id="selected-seat-info" class="text-muted mb-1"></div>
+            <div id="selected-seat-price" class="text-success fw-bold fs-5"></div>
+        </div>
+
+        <form method="post" th:action="@{/tickets/book}" class="ms-auto">
+            <input type="hidden" name="sessionId" th:value="${sessionDto.id}"/>
+            <button type="submit" class="btn btn-success btn-lg">
+                Оплатить
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const seatInputs = document.querySelectorAll('input[name="selectedSeat"]');
+        const seatInfoBlock = document.getElementById('seat-info-block');
+        const seatInfo = document.getElementById('selected-seat-info');
+        const seatPrice = document.getElementById('selected-seat-price');
+        const price = seatInfoBlock.dataset.price;
+
+        seatInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                if (input.checked) {
+                    const [row, seat] = input.value.split('-');
+                    seatInfo.textContent = `Вы выбрали: ряд ${row}, место ${seat}`;
+                    seatPrice.textContent = `${price} ₽`;
+                    seatInfoBlock.style.visibility = 'visible';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

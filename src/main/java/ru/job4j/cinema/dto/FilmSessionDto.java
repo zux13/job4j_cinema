@@ -1,6 +1,7 @@
 package ru.job4j.cinema.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class FilmSessionDto {
 
@@ -13,6 +14,7 @@ public class FilmSessionDto {
     private String filmName;
     private String hallName;
     private String hallDescription;
+    private LocalDateTime startTime;
     private BigDecimal price;
 
     public FilmSessionDto() {
@@ -88,6 +90,14 @@ public class FilmSessionDto {
 
     public void setHallDescription(String hallDescription) {
         this.hallDescription = hallDescription;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
     public BigDecimal getPrice() {
