@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:include="fragments/header :: header"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div class="container mb-4 flex-grow-1">
+
+    <div class="text-center mb-4">
+
+        <h2 class="mb-4" th:if="${message}">Ошибка бронирования</h2>
+        <h2 class="mb-4" th:unless="${message}">Успешная операция</h2>
+
+        <div th:if="${message}" class="alert alert-danger" role="alert">
+            <p th:text="${message}">Произошла ошибка</p>
+        </div>
+
+        <div th:if="${ticket != null and message == null}" class="card mx-auto" style="max-width: 500px;">
+            <div class="card-body">
+                <h5 class="card-title text-success">Детали бронирования:</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Ряд:</strong> <span th:text="${ticket.rowNumber}"></span></li>
+                    <li class="list-group-item"><strong>Место:</strong> <span th:text="${ticket.placeNumber}"></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a th:href="@{/sessions}" class="btn btn-primary">Назад к выбору билетов</a>
+        </div>
+    </div>
+</div>
+
+<footer th:include="fragments/footer :: footer"></footer>
+
+</body>
+</html>

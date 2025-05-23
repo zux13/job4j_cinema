@@ -11,11 +11,14 @@
                 <div class="card mb-4 shadow-sm p-3" style="font-size: 1.1rem;">
                     <div class="row no-gutters">
 
-                        <div class="col-md-2 d-flex align-items-center">
-                            <img th:src="@{/files/{id}(id=${fs.fileId})}" class="img-fluid rounded" alt="Обложка фильма">
+                        <div class="col-md-1 d-flex align-items-center" >
+                            <img th:src="@{/files/{id}(id=${fs.fileId})}"
+                                 class="img-fluid rounded"
+                                 style="height: 120px; width: auto;"
+                                 alt="Обложка фильма">
                         </div>
 
-                        <div class="col-md-10">
+                        <div class="col-md-11">
                             <div class="card-body py-2">
 
                                 <div class="d-flex justify-content-between align-items-center mb-2">

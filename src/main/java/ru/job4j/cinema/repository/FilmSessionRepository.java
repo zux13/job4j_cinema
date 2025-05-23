@@ -9,8 +9,6 @@ public interface FilmSessionRepository {
 
     Optional<FilmSession> findById(int id);
 
-    Collection<FilmSession> findByFilmId(int filmId);
-
     Collection<FilmSession> findAll();
 
 }

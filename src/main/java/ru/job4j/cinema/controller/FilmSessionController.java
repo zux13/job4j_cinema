@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.cinema.dto.FilmSessionDto;
+import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.service.FilmSessionService;
 
 import java.util.Optional;
@@ -33,7 +34,13 @@ public class FilmSessionController {
             model.addAttribute("message", "Сеанс с указанным идентификатором не найден");
             return "errors/404";
         }
+
+        Ticket ticket = new Ticket();
+        ticket.setSessionId(optionalFilmSessionDto.get().getId());
+
         model.addAttribute("sessionDto", optionalFilmSessionDto.get());
+        model.addAttribute("ticket", ticket);
+
         return "sessions/single";
     }
 

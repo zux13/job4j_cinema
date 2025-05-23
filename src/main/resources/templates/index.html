@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head th:include="fragments/header :: header"></head>
 <body class="d-flex flex-column min-vh-100">
+
 <div th:replace="fragments/navigation :: navigation"></div>
+
 <div class="container mb-4 flex-grow-1">
-    <h2>Кинотеатр</h2>
+
+    <h2 class="mb-4">Добро пожаловать в Кинотеатр</h2>
+
+    <h4 class="my-4">Ближайшие сеансы</h4>
+    <div class="row g-4">
+        <div class="col-12 mb-2" th:each="fs : ${sessions}">
+            <a th:href="@{/sessions/{id}(id=${fs.id})}" class="text-decoration-none text-dark">
+                <div class="card shadow-sm p-3" style="font-size: 1.1rem;">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto pe-3">
+                            <img th:src="@{/files/{id}(id=${fs.fileId})}"
+                                 alt="Обложка фильма"
+                                 class="img-fluid rounded"
+                                 style="height: 60px; width: auto;">
+                        </div>
+                        <div class="col">
+                            <div class="card-body py-2">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0 font-weight-bold" th:text="${fs.filmName}">Фильм</h5>
+                                    <div class="text-right text-success font-weight-bold" th:text="${fs.price} + ' ₽'">350 ₽</div>
+                                </div>
+                                <div class="text-muted small">
+                                    <span th:text="${fs.hallName}">Зал 1</span>,
+                                    <span th:text="${#temporals.format(fs.startTime, 'dd.MM.yyyy HH:mm')}">21.05.2025 18:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </div>
+
 <footer th:include="fragments/footer :: footer"></footer>
+
 </body>
 </html>

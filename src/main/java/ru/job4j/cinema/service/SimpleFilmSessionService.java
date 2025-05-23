@@ -9,10 +9,7 @@ import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.repository.FilmSessionRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SimpleFilmSessionService implements FilmSessionService {
