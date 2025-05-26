@@ -11,4 +11,8 @@ public interface FilmSessionRepository {
 
     Collection<FilmSession> findAll();
 
+    Optional<FilmSession> save(FilmSession filmSession);
+
+    void deleteById(int id);
+
 }

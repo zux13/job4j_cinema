@@ -37,4 +37,30 @@ public class Sql2oHallRepository implements HallRepository {
                     .executeAndFetch(Hall.class);
         }
     }
+
+    @Override
+    public Optional<Hall> save(Hall hall) {
+        try (Connection connection = sql2o.open()) {
+            String sql = """
+                    INSERT INTO halls(`name`, `row_count`, `place_count`, `description`)
+                    VALUES (:name, :rowCount, :placeCount, :description);
+                    """;
+            Query query = connection.createQuery(sql, true)
+                    .addParameter("name", hall.getName())
+                    .addParameter("rowCount", hall.getRowCount())
+                    .addParameter("placeCount", hall.getPlaceCount())
+                    .addParameter("description", hall.getDescription());
+            int generatedKey = query.executeUpdate().getKey(Integer.class);
+            hall.setId(generatedKey);
+            return Optional.of(hall);
+        }
+    }
+
+    @Override
+    public void deleteById(int id) {
+        try (Connection connection = sql2o.open()) {
+            Query query = connection.createQuery("DELETE FROM halls WHERE id=:id");
+            query.addParameter("id", id).executeUpdate();
+        }
+    }
 }

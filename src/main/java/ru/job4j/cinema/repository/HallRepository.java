@@ -11,4 +11,8 @@ public interface HallRepository {
 
     Collection<Hall> findAll();
 
+    Optional<Hall> save(Hall hall);
+
+    void deleteById(int id);
+
 }
