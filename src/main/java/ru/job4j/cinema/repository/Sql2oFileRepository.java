@@ -1,5 +1,7 @@
 package ru.job4j.cinema.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @Repository
 public class Sql2oFileRepository implements FileRepository {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Sql2oFileRepository.class);
     private final Sql2o sql2o;
 
     Sql2oFileRepository(Sql2o sql2o) {
@@ -30,8 +33,9 @@ public class Sql2oFileRepository implements FileRepository {
             file.setId(generatedKey);
             return Optional.of(file);
         } catch (Sql2oException e) {
-            return Optional.empty();
+            LOGGER.error("Error saving file: {}", file, e);
         }
+        return Optional.empty();
     }
 
     @Override

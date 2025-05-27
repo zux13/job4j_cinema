@@ -1,5 +1,7 @@
 package ru.job4j.cinema.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @Repository
 public class Sql2oFilmSessionRepository implements FilmSessionRepository {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Sql2oFilmSessionRepository.class);
     private final Sql2o sql2o;
 
     public Sql2oFilmSessionRepository(Sql2o sql2o) {
@@ -56,8 +59,9 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
             filmSession.setId(generatedKey);
             return Optional.of(filmSession);
         } catch (Sql2oException e) {
-            return Optional.empty();
+            LOGGER.error("Error saving filmSession: {}", filmSession, e);
         }
+        return Optional.empty();
     }
 
     @Override
