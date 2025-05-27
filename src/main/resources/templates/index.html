@@ -9,6 +9,12 @@
 
     <h2 class="mb-4">Добро пожаловать в Кинотеатр</h2>
 
+    <div class="alert alert-info text-center" role="alert"
+         th:if="${user.name == 'Гость'}">
+        Для покупки билета <a th:href="@{/users/login}" class="alert-link">войдите</a> или
+        <a th:href="@{/users/register}" class="alert-link">зарегистрируйтесь</a>.
+    </div>
+
     <h4 class="my-4">Ближайшие сеансы</h4>
     <div class="row g-4">
         <div class="col-12 mb-2" th:each="fs : ${sessions}">

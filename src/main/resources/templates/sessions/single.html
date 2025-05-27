@@ -17,7 +17,7 @@
 
     <div class="row align-items-center">
         <div class="col-md-3 d-flex align-items-center justify-content-center h-100 mb-4">
-            <a th:href="@{/films/{id}(id=${sessionDto.filmId})}">
+            <a class="card" th:href="@{/films/{id}(id=${sessionDto.filmId})}">
                 <img th:src="@{/files/{id}(id=${sessionDto.fileId})}" class="img-fluid img-thumbnail" alt="Обложка фильма">
             </a>
         </div>
